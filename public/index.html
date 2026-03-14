@@ -2043,4 +2043,24 @@ async function updateProfile() {
   } catch(e) { showToast('❌ ' + (e.message || 'Error'), '❌'); }
 }
 function safeJson(v, fb) { if(!v)return fb; if(Array.isArray(v))return v; try{return JSON.parse(v);}catch(e){return fb;} }
-function formatDate(iso) { if(!iso)return'–'; return new Date(iso).toLocaleDateString('en-IN',
+function formatDate(iso) { if(!iso)return'–'; return new Date(iso).toLocaleDateString('en-IN',{ day:'numeric', month:'short', year:'numeric' }); }
+function setActiveNav(page) {
+  document.querySelectorAll('.nav-links a').forEach(function(a){ a.classList.remove('active'); });
+  var el = document.getElementById('nav-' + page); if(el) el.classList.add('active');
+}
+
+// ── INIT ──
+(function init() {
+  var t = localStorage.getItem('syu_theme') || 'light';
+  document.documentElement.setAttribute('data-theme', t);
+  var btn = document.getElementById('themeBtn'); if(btn) btn.textContent = t === 'dark' ? '☀️' : '🌙';
+  loadCartFromStorage();
+  loadWishlist();
+  initAuth();
+  loadProducts();
+  loadHomeReviews();
+  updateContactForm();
+})();
+</script>
+</body>
+</html>
