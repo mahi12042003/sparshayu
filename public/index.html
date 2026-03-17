@@ -1696,8 +1696,10 @@ function otpMove(el, idx, mode) {
   }
   // Auto submit when last box filled
   if (idx === 5 && val) {
-    if (mode === 'signup') verifySignupOTP();
-    else verifyLoginOTP();
+    var step2Login = document.getElementById('loginStep2');
+    var step2Signup = document.getElementById('signupStep2');
+    if (mode === 'signup' && step2Signup && step2Signup.classList.contains('active')) verifySignupOTP();
+    else if (mode === 'login' && step2Login && step2Login.classList.contains('active')) verifyLoginOTP();
   }
 }
 function otpBack(el, evt, idx, mode) {
